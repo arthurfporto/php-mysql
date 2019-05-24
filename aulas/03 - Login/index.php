@@ -14,18 +14,20 @@
 
   <div class="container-fluid">
    <div class="row">
-    <div class="col-md-4 mx-auto">
-       <form action="validar.php" method="post">
+    <div class="col-md-3 mx-auto mt-5">
+
+      <form action="validar.php" method="post">
         <div class="form-group">
           <label for="exampleInputEmail1">Email</label>
-          <input type="email" class="form-control" name="usuEmail" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+          <input name="usuEmail" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Digite o e-mail">
         </div>
         <div class="form-group">
-          <label for="exampleInputPassword1">Senha</label>
-          <input type="password" class="form-control" name="usuSenha" id="exampleInputPassword1" placeholder="Password">
+          <label for="exampleInputPassword1">Password</label>
+          <input name="usuSenha" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
         </div>
-        <button type="submit" class="btn btn-primary">Login</button>
+        <button type="submit" class="btn btn-primary btn-block">Login</button>
       </form>
+      
     </div>
   </div>
 </div>

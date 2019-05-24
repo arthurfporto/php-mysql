@@ -15,8 +15,8 @@
     <div class="container-fluid">
       Soma:
       <form action="resultadoPOST.php" method="post">
-        <input type="number" name="num1"> +
-        <input type="number" name="num2"> 
+        <input type="text" name="num1"> +
+        <input type="text" name="num2"> 
         <input type="submit" name="submit" value="=">
       </form>
 

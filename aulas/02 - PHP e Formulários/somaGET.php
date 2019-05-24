@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="pt-br">
+<html lang="en">
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -11,15 +11,14 @@
     <title>Calculadora</title>
   </head>
   <body>
-
+    
     <div class="container-fluid">
-      Soma:
+      Informe os números a serem somados:
       <form action="resultadoGET.php" method="get">
-        <input type="number" name="num1"> +
-        <input type="number" name="num2"> 
-        <input type="submit" name="submit" value="=">
+        <input type="text" name="num1"> + 
+        <input type="text" name="num2"> 
+        <input type="submit" value="=">
       </form>
-
     </div>
 
     <!-- Optional JavaScript -->

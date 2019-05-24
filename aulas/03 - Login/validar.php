@@ -14,11 +14,13 @@
 
   <div class="container-fluid">
    <div class="row">
-    <div class="col-md-4 mx-auto">
-       <?php 
-       echo "Email: " . $_POST['usuEmail'] . "<br />";
-       echo "Senha: " . md5($_POST['usuSenha']);
-       ?>
+    <div class="col-md-4 mx-auto mt-5">
+
+      <h5>Informações do usuário</h5>
+      <?php 
+      echo "Email: " . $_POST['usuEmail'] . " <br />";
+      echo "Senha: ". md5($_POST['usuSenha']);
+      ?>
     </div>
   </div>
 </div>

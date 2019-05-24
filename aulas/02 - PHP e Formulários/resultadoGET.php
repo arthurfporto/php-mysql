@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="pt-br">
+<html lang="en">
 <head>
   <!-- Required meta tags -->
   <meta charset="utf-8">
@@ -13,10 +13,14 @@
 <body>
 
   <div class="container-fluid">
-    Resultado =
     <?php 
-    echo $_GET['num1']+$_GET['num2'];
+    $n1 = $_GET['num1'];
+    $n2 = $_GET['num2'];
+    $r = $n1 + $n2;
+
+    echo "Resultado = $r";
     ?>
+
   </div>
 
   <!-- Optional JavaScript -->
