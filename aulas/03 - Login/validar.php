@@ -18,6 +18,9 @@ WHERE usuEmail = '$email' AND usuSenha = '$senha'
 //    classe de conexão mysqli() expressa pelo obj $con
 $resultado = $con->query($sql);
 
+// Fechando a conexção
+fecharConexao($con);
+
 // Transformando a estrutura do $resultado em um obj.
 //    com as informações dos campos da tabela no BD.
 $infoUsuario = mysqli_fetch_object($resultado);
