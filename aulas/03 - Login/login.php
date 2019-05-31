@@ -14,7 +14,7 @@
 
   <div class="container-fluid">
    <div class="row">
-    <div class="col-md-3 mx-auto mt-5">
+    <div class="col-md-5 mx-auto mt-5">
 
       <form action="validar.php" method="post">
         <div class="form-group">

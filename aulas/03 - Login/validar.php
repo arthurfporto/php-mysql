@@ -1,34 +1,30 @@
-<!doctype html>
-<html lang="pt-br">
-<head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<?php 
+// Conectando com o banco (veja o arquivo bd_conexao.php)
+// Agora existe o obj $con conectado com o BD
+require_once('bd_conexao.php');
 
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+// Pegando as informações do formulário.
+$email  = $_POST['usuEmail'];
+$senha  = $_POST['usuSenha'];
 
-  <title>Login</title>
-</head>
-<body>
+// Criando a minha string com o código SQL de consulta
+$sql = "
+SELECT *
+FROM usuario
+WHERE usuEmail = '$email' AND usuSenha = '$senha'
+";
 
-  <div class="container-fluid">
-   <div class="row">
-    <div class="col-md-4 mx-auto mt-5">
+// Mando a SQL para o banco através do método query da 
+//    classe de conexão mysqli() expressa pelo obj $con
+$resultado = $con->query($sql);
 
-      <h5>Informações do usuário</h5>
-      <?php 
-      echo "Email: " . $_POST['usuEmail'] . " <br />";
-      echo "Senha: ". md5($_POST['usuSenha']);
-      ?>
-    </div>
-  </div>
-</div>
+// Transformando a estrutura do $resultado em um obj.
+//    com as informações dos campos da tabela no BD.
+$infoUsuario = mysqli_fetch_object($resultado);
 
-<!-- Optional JavaScript -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-</body>
-</html>
+if (empty($infoUsuario)) {
+  header("Location: login.php");
+} else {  
+  header("Location: area-restrita.php?nome=$infoUsuario->usuNome");
+}
+?>
