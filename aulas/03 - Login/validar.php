@@ -26,7 +26,7 @@ fecharConexao($con);
 $infoUsuario = mysqli_fetch_object($resultado);
 
 if (empty($infoUsuario)) {
-  header("Location: login.php");
+  header("Location: login.php?erro_login");
 } else {  
   header("Location: area-restrita.php?nome=$infoUsuario->usuNome");
 }

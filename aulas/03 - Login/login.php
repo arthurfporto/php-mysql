@@ -16,6 +16,20 @@
    <div class="row">
     <div class="col-md-5 mx-auto mt-5">
 
+      <?php 
+      if(isset($_GET['erro_login'])){
+        ?>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          E-mail ou senha incorreta! Tente novamente!
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <?php
+      }
+      ?>
+      
+
       <form action="validar.php" method="post">
         <div class="form-group">
           <label for="exampleInputEmail1">Email</label>
