@@ -1,7 +1,7 @@
 <?php 
 // Conectando com o banco (veja o arquivo bd_conexao.php)
 // Agora existe o obj $con conectado com o BD
-require_once('bd_conexao.php');
+require_once('../00 - BD/bd_conexao.php');
 
 // Pegando as informações do formulário.
 $email  = $_POST['usuEmail'];
