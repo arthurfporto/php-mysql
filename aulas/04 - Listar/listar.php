@@ -29,26 +29,22 @@
         FROM usuario
         ";
 
-        // Mando a SQL para o banco através do método query da 
-        //    classe de conexão mysqli() expressa pelo obj $con
         $resultado = $con->query($sql);
-
         ?>
-        <table class="table table-hover table-striped">
+
+        <table class="table table-striped">
           <thead>
             <tr>
               <th scope="col">#</th>
-              <th scope="col">E-mail</th>
+              <th scope="col">Email</th>
               <th scope="col">Senha</th>
               <th scope="col">Nome</th>
-              <th scope="col">Ações</th>
+              <th scope="col">Ação</th>
             </tr>
           </thead>
           <tbody>
             <?php
-            // Transformando a estrutura do $resultado em um obj.
-            //    com as informações dos campos da tabela no BD.
-            while ($infoUsuario = mysqli_fetch_object($resultado)) {
+            while($infoUsuario = mysqli_fetch_object($resultado)){
               ?>
               <tr>
                 <th scope="row"><?php echo $infoUsuario->usuId; ?></th>
@@ -56,14 +52,14 @@
                 <td><?php echo $infoUsuario->usuSenha; ?></td>
                 <td><?php echo $infoUsuario->usuNome; ?></td>
                 <td>
-                  <a href="#">
+                  <a href="alterar_usuario.php?id=<?php echo $infoUsuario->usuId; ?>">
                     <i class="far fa-edit text-warning fa-lg"></i>
                   </a>                   
-                  <a href="#">
+                  <a href="excluir_usuario.php?id=<?php echo $infoUsuario->usuId; ?>">
                     <i class="fas fa-trash-alt text-danger fa-lg"></i>
                   </a>
                 </td>
-              </tr>              
+              </tr>
               <?php
             }
             ?>            

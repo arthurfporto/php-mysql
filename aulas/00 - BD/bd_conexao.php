@@ -14,6 +14,6 @@ function fecharConexao($conexao){
   $conexao->close();
 }
 
-// Chamada da função
-$con = conectarBanco($bd_host,$bd_usu,$bd_senha,$bd_banco); // Chamada da função
+// Chamada da função com informações vindas do bd_config.php
+$con = conectarBanco($bd_host,$bd_usu,$bd_senha,$bd_banco); 
 ?>
