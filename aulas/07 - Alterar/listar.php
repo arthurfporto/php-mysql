@@ -23,27 +23,6 @@
         <div class="col-md-9 mx-auto">
 
           <?php
-        if (isset($_GET['result']) && $_GET['result'] == 0) {
-          ?>
-          <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            Operação não realizada!
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <?php
-        } elseif (isset($_GET['result']) && $_GET['result'] == 1) {
-          ?>
-          <div class="alert alert-success alert-dismissible fade show" role="alert">
-            Operação realizada com sucesso!
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <?php
-        }
-        ?>
-          <?php
         // Conectando com o banco (veja o arquivo bd_conexao.php)
         // Agora existe o obj $con conectado com o BD
         require_once('../00 - BD/bd_conexao.php');
@@ -53,6 +32,7 @@
         SELECT *
         FROM usuario
         ";
+
         // Mandando uma instrução SQL Query para o banco. 
         $resultado = $con->query($sql); ?>
 

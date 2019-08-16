@@ -63,15 +63,17 @@ if (!isset($_GET['campoId']))
         FROM usuario
         WHERE usuId = $varId
         ";
+
         // Mandando uma instrução SQL Query para o banco. 
         $resultado = $con->query($sql);
+        // Trantando a variável resultado em objeto
         $infoUsuario = mysqli_fetch_object($resultado);
         ?>
 
           <form action="alterar-no-banco.php" method="post">
             <div class="form-group">
               <label for="exampleInputId">ID</label>
-              <input value="<?php echo $infoUsuario->usuId; ?>" name="id" type="number" disabled class="form-control"
+              <input value="<?php echo $infoUsuario->usuId; ?>" name="id" type="text" disabled class="form-control"
                 id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Digite o e-mail">
               <input type="hidden" name="campoId" value="<?php echo $infoUsuario->usuId; ?>">
             </div>
