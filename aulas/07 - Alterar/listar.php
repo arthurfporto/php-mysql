@@ -14,19 +14,19 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
       integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
 
-    <title>Inserir Usuários</title>
+    <title>Listar Usuários</title>
   </head>
 
   <body>
     <div class="container-fluid">
       <div class="row">
-        <div class="col-md-4 mx-auto">
+        <div class="col-md-9 mx-auto">
 
           <?php
         if (isset($_GET['result']) && $_GET['result'] == 0) {
           ?>
           <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            Erro ao inserir no banco!
+            Operação não realizada!
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -35,7 +35,7 @@
         } elseif (isset($_GET['result']) && $_GET['result'] == 1) {
           ?>
           <div class="alert alert-success alert-dismissible fade show" role="alert">
-            Inserção realizada com sucesso!
+            Operação realizada com sucesso!
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -43,25 +43,56 @@
           <?php
         }
         ?>
+          <?php
+        // Conectando com o banco (veja o arquivo bd_conexao.php)
+        // Agora existe o obj $con conectado com o BD
+        require_once('../00 - BD/bd_conexao.php');
 
-          <form action="inserir-no-banco.php" method="post">
-            <div class="form-group">
-              <label for="exampleInputEmail">Email</label>
-              <input name="campoEmail" type="email" class="form-control" id="exampleInputEmail"
-                aria-describedby="emailHelp" placeholder="Digite o e-mail">
-            </div>
-            <div class="form-group">
-              <label for="exampleInputSenha">Senha</label>
-              <input name="campoSenha" type="password" class="form-control" id="exampleInputSenha"
-                aria-describedby="senhaHelp" placeholder="Digite a senha">
-            </div>
-            <div class="form-group">
-              <label for="exampleInputNome">Nome</label>
-              <input name="campoNome" type="text" class="form-control" id="exampleInputNome" aria-describedby="nomeHelp"
-                placeholder="Digite o seu nome">
-            </div>
-            <button type="submit" name="botao" class="btn btn-primary btn-block">Salvar</button>
-          </form>
+        // Criando a minha string com o código SQL de consulta
+        $sql = "
+        SELECT *
+        FROM usuario
+        ";
+        // Mandando uma instrução SQL Query para o banco. 
+        $resultado = $con->query($sql); ?>
+
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Email</th>
+                <th scope="col">Senha</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Ação</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php
+            while ($infoUsuario = mysqli_fetch_object($resultado)) {
+              ?>
+              <tr>
+                <th scope="row"><?php echo $infoUsuario->usuId; ?></th>
+                <td><?php echo $infoUsuario->usuEmail; ?></td>
+                <td><?php echo $infoUsuario->usuSenha; ?></td>
+                <td><?php echo $infoUsuario->usuNome; ?></td>
+                <td>
+                  <a href="form-alterar.php?campoId=<?php echo $infoUsuario->usuId; ?>">
+                    <i class="far fa-edit text-warning fa-lg"></i>
+                  </a>
+                  <a href="#">
+                    <i class="fas fa-trash-alt text-danger fa-lg"></i>
+                  </a>
+                </td>
+              </tr>
+              <?php
+            }
+            ?>
+            </tbody>
+          </table>
+          <?php
+        // Fechando a conexção
+        fecharConexao($con);
+        ?>
         </div>
       </div>
     </div>

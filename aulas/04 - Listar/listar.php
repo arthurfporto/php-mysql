@@ -31,7 +31,7 @@
         SELECT *
         FROM usuario
         ";
-
+        // Mandando uma instrução SQL Query para o banco. 
         $resultado = $con->query($sql); ?>
 
           <table class="table table-striped">

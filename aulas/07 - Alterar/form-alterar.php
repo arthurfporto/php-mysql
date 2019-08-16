@@ -1,3 +1,8 @@
+<?php
+if (!isset($_GET['campoId']))
+  header('Location: listar.php')
+  ?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -14,7 +19,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
       integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
 
-    <title>Inserir Usuários</title>
+    <title>Alterar Usuário</title>
   </head>
 
   <body>
@@ -44,21 +49,46 @@
         }
         ?>
 
-          <form action="inserir-no-banco.php" method="post">
+          <?php
+        // Conectando com o banco (veja o arquivo bd_conexao.php)
+        // Agora existe o obj $con conectado com o BD
+        require_once('../00 - BD/bd_conexao.php');
+
+        // Pegando o id apartir da url
+        $varId = $_GET['campoId'];
+
+        // Criando a minha string com o código SQL de consulta
+        $sql = "
+        SELECT *
+        FROM usuario
+        WHERE usuId = $varId
+        ";
+        // Mandando uma instrução SQL Query para o banco. 
+        $resultado = $con->query($sql);
+        $infoUsuario = mysqli_fetch_object($resultado);
+        ?>
+
+          <form action="alterar-no-banco.php" method="post">
+            <div class="form-group">
+              <label for="exampleInputId">ID</label>
+              <input value="<?php echo $infoUsuario->usuId; ?>" name="id" type="number" disabled class="form-control"
+                id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Digite o e-mail">
+              <input type="hidden" name="campoId" value="<?php echo $infoUsuario->usuId; ?>">
+            </div>
             <div class="form-group">
               <label for="exampleInputEmail">Email</label>
-              <input name="campoEmail" type="email" class="form-control" id="exampleInputEmail"
-                aria-describedby="emailHelp" placeholder="Digite o e-mail">
+              <input value="<?php echo $infoUsuario->usuEmail; ?>" name="campoEmail" type="email" class="form-control"
+                id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Digite o e-mail">
             </div>
             <div class="form-group">
               <label for="exampleInputSenha">Senha</label>
-              <input name="campoSenha" type="password" class="form-control" id="exampleInputSenha"
-                aria-describedby="senhaHelp" placeholder="Digite a senha">
+              <input value="<?php echo $infoUsuario->usuSenha; ?>" name="campoSenha" type="text" class="form-control"
+                id="exampleInputSenha" aria-describedby="senhaHelp" placeholder="Digite a senha">
             </div>
             <div class="form-group">
               <label for="exampleInputNome">Nome</label>
-              <input name="campoNome" type="text" class="form-control" id="exampleInputNome" aria-describedby="nomeHelp"
-                placeholder="Digite o seu nome">
+              <input value="<?php echo $infoUsuario->usuNome; ?>" name="campoNome" type="text" class="form-control"
+                id="exampleInputNome" aria-describedby="nomeHelp" placeholder="Digite o seu nome">
             </div>
             <button type="submit" name="botao" class="btn btn-primary btn-block">Salvar</button>
           </form>

@@ -1,28 +1,41 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-br">
 
   <head>
     <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
 
-    <title>Login</title>
+    <!-- Icones -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
+
+    <title>Excluir Usuários</title>
   </head>
 
   <body>
-
     <div class="container-fluid">
       <div class="row">
-        <div class="col-md-5 mx-auto mt-5">
+        <div class="col-md-4 mx-auto">
+
           <?php
-        if (isset($_GET['erro_login'])) {
+        if (isset($_GET['result']) && $_GET['result'] == 0) {
           ?>
           <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            E-mail ou senha incorreta! Tente novamente!
+            Operação não realizada!
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <?php
+        } elseif (isset($_GET['result']) && $_GET['result'] == 1) {
+          ?>
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+            Operação realizada com sucesso!
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -30,20 +43,15 @@
           <?php
         }
         ?>
-          <form action="validar.php" method="post">
-            <div class="form-group">
-              <label for="exampleInputEmail1">Email</label>
-              <input name="usuEmail" type="email" class="form-control" id="exampleInputEmail1"
-                aria-describedby="emailHelp" placeholder="Digite o e-mail">
-            </div>
-            <div class="form-group">
-              <label for="exampleInputPassword1">Password</label>
-              <input name="usuSenha" type="password" class="form-control" id="exampleInputPassword1"
-                placeholder="Password">
-            </div>
-            <button type="submit" class="btn btn-primary btn-block">Login</button>
-          </form>
 
+          <form action="excluir-no-banco.php" method="get">
+            <div class="form-group">
+              <label for="exampleInputId">ID</label>
+              <input name="campoId" type="text" class="form-control" id="exampleInputId" aria-describedby="IdHelp"
+                placeholder="Digite o Id">
+            </div>
+            <button type="submit" name="botao" class="btn btn-primary btn-block">Excluir</button>
+          </form>
         </div>
       </div>
     </div>

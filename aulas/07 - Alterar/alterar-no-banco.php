@@ -4,15 +4,17 @@ if (isset($_POST['botao'])) {
   // Agora existe o obj $con conectado com o BD
   require_once('../00 - BD/bd_conexao.php');
 
-  // Recebendo as informações do form-inserir.php
+  // Recebendo as informações do form-alterar.php
+  $varId = $_POST['campoId'];
   $varEmail = $_POST['campoEmail'];
   $varSenha = $_POST['campoSenha'];
   $varNome = $_POST['campoNome'];
 
-  // Criando a minha string com o código SQL de inserção
+  // Criando a minha string com o código SQL de atualização
   $sql = "
-  INSERT INTO usuario (usuEmail, usuSenha, usuNome)
-  VALUES ('$varEmail', '$varSenha', '$varNome')
+  UPDATE usuario 
+  SET usuEmail = '$varEmail', usuSenha = '$varSenha', usuNome= '$varNome'
+  WHERE usuId = $varId
   ";
 
   // Mandando a Query para o banco!
@@ -25,7 +27,7 @@ if (isset($_POST['botao'])) {
   // Fechando a conexão
   fecharConexao($con);
 
-  header("Location: form-inserir.php?result=$flag");
+  header("Location: form-alterar.php?result=$flag&campoId=$varId");
 } else {
-  header("Location: form-inserir.php");
+  header("Location: listar.php");
 }
